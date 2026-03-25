@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Outbound traffic network and port requirements - Table</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; margin: 20px; }
+    h1 { font-size: 18px; margin-bottom: 8px; }
+    h2 { font-size: 14px; margin-top: 18px; margin-bottom: 8px; }
+    table { border-collapse: collapse; width: 100%; max-width: 1200px; }
+    th, td { border: 1px solid #cfcfcf; padding: 8px 10px; vertical-align: top; font-size: 12px; }
+    th { background: #f5f5f5; text-align: left; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+    .note { color: #333; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Outbound traffic network and port requirements (ISPSS)</h1>
+  <div class="note">
+    아래 표는 `outbound.md`에 있는 “src/dst/오픈 포트/방향” 요약을 HTML 표로 다시 정리한 것입니다.
+  </div>
+
+  <h2>아웃바운드(Outbound) 규칙</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:90px;">방향</th>
+        <th>src(일반화)</th>
+        <th>dst(문서의 FQDN/IP 패턴)</th>
+        <th style="width:130px;">Protocol</th>
+        <th style="width:220px;">오픈 포트 / 용도</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Outbound</td>
+        <td>ISPSS 구성요소/온-프레미스 Connector 호스트</td>
+        <td><code>https://*.cyberark.cloud</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / Privilege Cloud 서비스 백엔드 REST/API</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>ISPSS 구성요소/온-프레미스 Connector 호스트</td>
+        <td><code>https://*.cyberark.cloud</code></td>
+        <td>TCP</td>
+        <td><code>1858</code> / Privilege Cloud 백엔드 통신</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>Connector Management agent가 설치된 호스트</td>
+        <td><code>https://*.cyberark.cloud</code></td>
+        <td>TCP/HTTP</td>
+        <td><code>443</code> / Connector Management REST/API</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>Connector Management agent가 설치된 호스트</td>
+        <td><code>https://*-.s3.amazonaws.com</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / 설치 파일 및 로그(동적)</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>Connector Management agent가 설치된 호스트</td>
+        <td><code>https://*..amazonaws.com</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / IOT communication</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>Connector Management agent가 설치된 호스트</td>
+        <td><code>https://component-registry-store-490081306957.s3.amazonaws.com/</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / 컴포넌트 설치/업그레이드(동적)</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>프라이빌리지 클라우드 SSL 인증서 검증 경로</td>
+        <td><code>http://*.amazontrust.com</code></td>
+        <td>TCP/HTTP</td>
+        <td><code>80</code> / SSL certificate validation(문서 명시)</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>Secure Tunnel 사용 환경의 온-프레미스 구성요소</td>
+        <td><code>https://connector-.privilegecloud.cyberark.cloud</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / Secure Tunnel(커넥터)</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>Secure Tunnel 사용 환경의 온-프레미스 구성요소</td>
+        <td><code>https://console.privilegecloud.cyberark.cloud</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / Secure Tunnel(백엔드 서비스 관리)</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>브라우저 접근 관련 컴포넌트(필요시)</td>
+        <td><code>https://.cyberark.cloud</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / Privileged Cloud portal</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>Privilege Cloud API 사용하는 온-프레미스 컴포넌트</td>
+        <td><code>https://.privilegecloud.cyberark.cloud</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / Privilege Cloud for API</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>PSM/PSM for SSH(네이티브 RDP 인증 처리)</td>
+        <td><code>https://.id.cyberark.cloud</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / Identity Administration</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>HTML5 Gateway 사용하는 경우</td>
+        <td><code>https://webaccess-.privilegecloud.cyberark.cloud</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / (Optional) HTML5 Gateway</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>Connector Management Agent public IP 리포팅(SSL inspection 제외)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:90px;">방향</th>
+        <th style="width:320px;">src</th>
+        <th>dst(URL)</th>
+        <th style="width:130px;">Protocol</th>
+        <th style="width:220px;">오픈 포트 / 용도</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Outbound</td>
+        <td>Connector Management agent 호스트</td>
+        <td><code>https://api.ipify.org?format=text</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / public IP 리포팅(SSL inspection 제외)</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>Connector Management agent 호스트</td>
+        <td><code>https://ipinfo.io/ip</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / public IP 리포팅(SSL inspection 제외)</td>
+      </tr>
+      <tr>
+        <td>Outbound</td>
+        <td>Connector Management agent 호스트</td>
+        <td><code>https://api.my-ip.io/ip</code></td>
+        <td>TCP/HTTPS</td>
+        <td><code>443</code> / public IP 리포팅(SSL inspection 제외)</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+
