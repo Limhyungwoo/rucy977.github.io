@@ -1,1 +1,0 @@
-# rucy977.github.io
